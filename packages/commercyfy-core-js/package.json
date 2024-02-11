@@ -1,0 +1,10 @@
+{
+  "name": "commercyfy-core-js",
+  "version": "0.0.1-alpha.1",
+  "description": "Front-end SDK library for commercyfy",
+  "main": "index.ts",
+  "scripts": {
+  },
+  "author": "NazgoooAtanasov",
+  "license": "ISC"
+}
