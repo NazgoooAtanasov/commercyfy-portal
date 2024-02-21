@@ -20,8 +20,14 @@ export type Category = {
   products: Product[] | undefined;
 };
 
-type Endpoint = "/categories/list" | "/categories/{slug}";
-type Method = "GET";
+type CategorySchema = Omit<Category, "id" | "products">;
+
+type Endpoint =
+  | "/categories/list"
+  | "/categories/{slug}"
+  | "/categories/create"
+  | "/product/{slug}";
+type Method = "GET" | "POST";
 
 interface Commercyfy {
   getCategories(): Promise<Category[] | ErrorMessage>;
@@ -34,8 +40,16 @@ export class CommercyfyConn implements Commercyfy {
     private auth: string,
   ) {}
 
-  private genHeaders(): Record<string, string> {
-    return { Authorization: this.auth };
+  private genHeaders(data?: Record<string, any>): Record<string, string> {
+    const headers: Record<string, string> = {
+      Authorization: this.auth,
+    };
+
+    if (data) {
+      headers["Content-type"] = "application/json";
+    }
+
+    return headers;
   }
 
   private async handledFetch<T>(
@@ -46,7 +60,7 @@ export class CommercyfyConn implements Commercyfy {
     try {
       const options: Record<string, any> = {
         method,
-        headers: this.genHeaders(),
+        headers: this.genHeaders(data),
       };
       if (options.method !== "GET") {
         options.body = JSON.stringify(data);
@@ -74,6 +88,23 @@ export class CommercyfyConn implements Commercyfy {
     const result = await this.handledFetch<Category>(
       "/categories/{slug}".replace("{slug}", id) as Endpoint,
       "GET",
+    );
+    return result;
+  }
+
+  async getProduct(id: string): Promise<Product | ErrorMessage> {
+    const result = await this.handledFetch<Product>(
+      `/product/{slug}`.replace("{slug}", id) as Endpoint,
+      "GET",
+    );
+    return result;
+  }
+
+  async createCategory(category: CategorySchema): Promise<void | ErrorMessage> {
+    const result = await this.handledFetch<void>(
+      `/categories/create`,
+      "POST",
+      category,
     );
     return result;
   }

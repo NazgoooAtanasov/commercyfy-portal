@@ -1,130 +1,55 @@
 <script lang="ts">
-import type { Category } from 'commercyfy-core-js';
-    import { backInOut, bounceInOut } from 'svelte/easing';
-    import { fly } from 'svelte/transition';
+  import CreateView from "$lib/components/CreateView.svelte";
+  import Flyout from "$lib/components/Flyout.svelte";
+  import Table from "$lib/components/Table.svelte";
+  import { CategoryFormSchema } from "$lib/formSchemas/index.js";
+  import type { Category } from "commercyfy-core-js";
 
-export let data;
-let categoryProductPreview: Category | null = null;
+  export let data;
+  let categoryProductPreview: Category | null = null;
 
-function setProductPreview(category: Category) {
-  if (categoryProductPreview && categoryProductPreview.id === category.id) {
-    categoryProductPreview = null;
-  } else {
-    categoryProductPreview = category;
+  function setProductPreview(category: Category) {
+    if (categoryProductPreview && categoryProductPreview.id === category.id) {
+      categoryProductPreview = null;
+    } else {
+      categoryProductPreview = category;
+    }
   }
-}
 </script>
 
-<div class="root">
-  <div class="categories">
-    <div class="fields fields-descriptor">
-      <div> ID </div>
-      <div> Description </div>
-    </div>
+<Table tableName="Categories" headerEntries={["ID", "Description"]}>
+  {#each data.categories as category}
+    <button on:click={() => setProductPreview(category)} class="row">
+      <div>
+        <a href="/categories/{category.id}">{category.category_reference}</a>
+      </div>
+      <div>{category.category_description}</div>
+    </button>
+  {/each}
+</Table>
 
-    {#each data.categories as category}
-      <button on:click={() => setProductPreview(category)} class="fields">
-        <div><a href="/categories/{category.id}">{category.category_reference}</a></div>
-        <div>{category.category_description}</div>
-        <span class="expander">+</span>
-      </button>
-    {/each}
-  </div>
+<Flyout visible={categoryProductPreview !== null}>
+  <h2 slot="slider-title">Products</h2>
 
-{#if categoryProductPreview}
-  <section class="slider" transition:fly={{duration: 150, easing: bounceInOut}}>
-    <div class="slider-header">
-      <h2>Products</h2>
-      <button on:click={() => (categoryProductPreview = null)} class="slider-close">x</button>
-    </div>
-    <div class="fields fields-descriptor">
-      <div> ID </div>
-      <div> Description </div>
-    </div>
-
-    {#each categoryProductPreview.products || [] as product}
-      <a href="/products/" class="fields">
-        <div>{product.id}</div>
+  <Table tableName="Products in category" headerEntries={["ID", "Description"]}>
+    {#each categoryProductPreview?.products || [] as product}
+      <a href="/product/{product.id}" class="row">
+        <div><a href="/product/{product.id}">{product.id}</a></div>
         <div>{product.product_description}</div>
       </a>
     {/each}
+  </Table>
+</Flyout>
 
-    {#each categoryProductPreview.products || [] as product}
-      <a href="/products/{product.id}" class="fields">
-        <div>{product.id}</div>
-        <div>{product.product_description}</div>
-      </a>
-    {/each}
-  </section>
-{/if}
-
-</div>
-
+<CreateView
+  triggerText="+"
+  method="POST"
+  schema={CategoryFormSchema}
+  entry="Category"
+/>
 
 <style>
-.root {
-  position: relative;
-  flex-grow: 1;
-  display: flex;
-  height: 100%;
-}
-.categories {
-  display: flex;
-  padding: 0 10px;
-  flex-direction: column;
-  flex-basis: 100%;
-}
-
-.fields {
-  width: 100%;
-  display: flex;
-  margin-bottom: 5px;
-  border: 1px solid #c3c3c3;
-}
-
-.fields-descriptor {
-  border: none;
-  border-bottom: 1px solid #c3c3c3;
-}
-
-.fields > * {
-  flex-basis: 33%;
-  padding: 25px;
-  position: relative;
-}
-
-.expander {
-  position: absolute;
-  right: 5px;
-}
-
-button {
-  background: none;
-  text-align: left;
-  cursor: pointer;
-}
-
-.slider {
-  z-index: 1;
-  height: 100%;
-  background-color: #ffffff;
-  overflow-y: scroll;
-  flex-basis: 45%;
-
-  -ms-overflow-style: none;  /* Internet Explorer 10+ */
-  scrollbar-width: none;  /* Firefox */
-}
-
-.slider::-webkit-scrollbar { 
-    display: none;  /* Safari and Chrome */
-}
-
-.slider-header {
-  display: flex;
-  justify-content: space-between;
-}
-
-.slider-close {
-  border: none;
-}
+  button {
+    text-align: left;
+  }
 </style>

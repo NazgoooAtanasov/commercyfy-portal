@@ -1,21 +1,60 @@
-<nav>
-  <div class="logo"></div>
-  <a href="/categories">Categories</a>
-</nav>
-<slot/>
+<script lang="ts">
+  import { page } from "$app/stores";
+  import "./variables.css";
+</script>
+
+<main>
+  <nav>
+    <div class="logo"></div>
+    <a href="/categories">Categories</a>
+  </nav>
+  <div class="content">
+    <div class="location-breadcrumb">
+      {$page.url.pathname}
+    </div>
+    <slot />
+  </div>
+</main>
 
 <style>
-nav {
-  display: flex;
-  border-bottom: 1px solid #3f3f3f;
-  width: 100%;
-}
+  main {
+    height: 100%;
+    width: 100%;
+    display: flex;
+  }
 
-nav * {
-  padding: 20px;
-}
+  nav {
+    display: flex;
+    border-bottom: 1px solid var(--color-accent);
+    flex-basis: 20%;
+    height: 100%;
+    background-color: var(--color-primary);
+  }
 
-.logo {
-  height: 100%;
-}
+  nav * {
+    padding: 20px;
+    color: white;
+  }
+
+  .logo {
+    height: 100%;
+  }
+
+  .content {
+    position: relative;
+    width: 100%;
+    display: flex;
+    background-color: var(--color-secondary);
+    padding: 0 20px;
+    flex-direction: column;
+    overflow-y: scroll;
+  }
+
+  .location-breadcrumb {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: var(--color-gray);
+    border-radius: var(--border-radius);
+    font-weight: bold;
+  }
 </style>
