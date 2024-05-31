@@ -4,7 +4,10 @@
 </script>
 
 <div class="table">
-  <h2>{tableName}</h2>
+  <div class="table-head">
+    <h2>{tableName}</h2>
+    <slot name="table-head" />
+  </div>
   <div class="row rows-descriptors">
     {#each headerEntries as entry}
       <div>{entry}</div>
@@ -23,6 +26,11 @@
     border-radius: var(--border-radius);
     background-color: var(--color-white);
     color: var(--color-accent);
+  }
+
+  .table-head {
+    display: flex;
+    justify-content: space-between;
   }
 
   :global(.row) {

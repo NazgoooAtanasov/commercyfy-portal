@@ -28,6 +28,3 @@
   schema={CategoryProductAssignSchema}
   entry="Product assignement"
 />
-
-<style>
-</style>

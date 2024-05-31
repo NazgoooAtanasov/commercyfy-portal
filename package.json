@@ -24,7 +24,8 @@
     "vite": "^5.0.3"
   },
   "dependencies": {
-    "commercyfy-core-js": "file:./packages/commercyfy-core-js"
+    "commercyfy-core-js": "file:./packages/commercyfy-core-js",
+    "zod": "^3.23.8"
   },
   "type": "module"
 }

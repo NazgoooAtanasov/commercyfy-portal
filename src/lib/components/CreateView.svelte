@@ -4,6 +4,7 @@
   import Input from "./Input.svelte";
   import { bounceInOut } from "svelte/easing";
   import { enhance } from "$app/forms";
+  import Button from "./Button.svelte";
 
   export let schema: FormSchema[];
   export let showViewFlag = false;
@@ -19,6 +20,7 @@
 <button on:click={() => showView()} class="create-view-trigger">
   {triggerText}
 </button>
+
 {#if showViewFlag}
   <section
     class="create-view"
@@ -37,10 +39,8 @@
         {/each}
       </div>
       <div class="create-view-footer">
-        <button type="submit" class="create-view-submit">Submit</button>
-        <button class="create-view-discard" on:click={() => showView()}
-          >Discard</button
-        >
+        <Button displayValue="Submit" />
+        <Button type="secondary" displayValue="Discard" onClick={showView} />
       </div>
     </form>
   </section>
@@ -49,12 +49,12 @@
 <style>
   .create-view {
     position: absolute;
+    inset: 0;
+
     width: 75%;
-    min-height: 200px;
-    top: 20px;
-    right: 0;
-    left: 0;
-    margin: 0 auto;
+    height: fit-content;
+    max-height: 100%;
+    margin: auto;
     padding: 20px 10px;
 
     background-color: var(--color-secondary);
@@ -85,22 +85,5 @@
   .create-view-footer {
     display: flex;
     justify-content: center;
-  }
-
-  .create-view-submit {
-    padding: 10px;
-    margin: 0 5px;
-
-    border-radius: var(--border-radius);
-    background-color: var(--color-primary);
-    color: var(--color-white);
-  }
-
-  .create-view-discard {
-    padding: 10px;
-    margin: 0 5px;
-
-    border-radius: var(--border-radius);
-    border: 1px solid var(--color-accent);
   }
 </style>

@@ -5,8 +5,8 @@
 
 <main>
   <nav>
-    <div class="logo"></div>
     <a href="/categories">Categories</a>
+    <a href="/signin">Signin</a>
   </nav>
   <div class="content">
     <div class="location-breadcrumb">
@@ -29,15 +29,12 @@
     flex-basis: 20%;
     height: 100%;
     background-color: var(--color-primary);
+    flex-direction: column;
   }
 
   nav * {
     padding: 20px;
     color: white;
-  }
-
-  .logo {
-    height: 100%;
   }
 
   .content {
