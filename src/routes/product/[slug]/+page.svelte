@@ -3,4 +3,4 @@
   export let data;
 </script>
 
-<DetailView headerName="Product properties" object={data.product} />
+<DetailView object={data.product} />

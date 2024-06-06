@@ -1,49 +1,50 @@
 <script lang="ts">
-  import type { Category, Product } from "commercyfy-core-js";
-  export let object: Product | Category;
-  export let headerName: string | undefined;
-  const entries = Object.entries(object);
+  import type { GetCategory, GetProduct, Product } from "commercyfy-core-js";
+  export let object: GetProduct | GetCategory;
+  const entries = Object.entries(object).filter(
+    ([key]) => key !== "custom_fields" && key !== "products",
+  );
+  const customFields = Object.entries(object.custom_fields);
 </script>
 
-<div class="detail-view">
-  <h2>
-    {headerName}
-  </h2>
+<div class="properties">
+  <h3>Base fields</h3>
   {#each entries as [key, value]}
-    <div class="detail-bubble">
-      <div class="detail-bubble-head">{key}</div>
-      <div class="detail-bubble-body">{value}</div>
+    <div class="property">
+      <div class="property-head">{key}</div>
+      <div class="property-body">{value}</div>
     </div>
   {/each}
+
+  {#if customFields.length > 0}
+    <h3>Custom fields</h3>
+    {#each customFields as [key, value]}
+      <div class="property">
+        <div class="property-head">{key}</div>
+        <div class="property-body">{value}</div>
+      </div>
+    {/each}
+  {/if}
 </div>
 
 <style>
-  h2 {
-    grid-column: span 16;
-  }
-  .detail-view {
-    display: grid;
-    width: 100%;
-
-    padding: 0 10px 10px;
-    margin-bottom: 10px;
-
-    grid-template-columns: repeat(16, 1fr);
-    grid-template-rows: auto;
-    gap: 5px;
-
-    border-radius: var(--border-radius);
+  .properties {
     background-color: var(--color-white);
+    border-radius: var(--border-radius);
+    padding: 0 10px 10px 10px;
+    margin-bottom: 10px;
   }
 
-  .detail-bubble {
+  .property {
     border: 1px solid var(--color-accent);
     border-radius: var(--border-radius);
-    padding: 25px;
-    grid-column: span 4;
+    padding: 15px;
+    margin: 10px 0;
+    box-shadow: var(--box-shadow);
   }
 
-  .detail-bubble-head {
-    border-bottom: 1px solid var(--color-accent);
+  .property-head {
+    font-weight: bold;
+    padding-bottom: 5px;
   }
 </style>

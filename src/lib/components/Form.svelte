@@ -38,7 +38,8 @@
       if (result.type === "error") {
         status = result.error.message;
       } else if (result.type === "failure") {
-        status = result.data?.message ?? "There was an error handling your request";
+        status =
+          result.data?.message ?? "There was an error handling your request";
       } else {
         status = "Success";
       }

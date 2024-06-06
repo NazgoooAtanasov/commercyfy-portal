@@ -5,7 +5,9 @@
 
 <div class="table">
   <div class="table-head">
-    <h2>{tableName}</h2>
+    {#if tableName}
+      <h2>{tableName}</h2>
+    {/if}
     <slot name="table-head" />
   </div>
   <div class="row rows-descriptors">
