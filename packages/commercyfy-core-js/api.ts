@@ -10,6 +10,7 @@ import type {
   GetPricebookRecord,
   GetPricebooks,
   GetProduct,
+  GetProducts,
   ObjectType,
   PortalUser,
 } from "./models";
@@ -36,7 +37,9 @@ export interface CommercyfyCoreActions {
   createCategory(
     categorySchema: CreateCategory,
   ): CommercyfyResponse<CommercyfyEntryResponse>;
+  assignProducts(id: string, productIds: string[]): CommercyfyResponse<void>;
 
+  getProducts(): CommercyfyResponse<GetProducts>;
   getProduct(id: string): CommercyfyResponse<GetProduct>;
   createProduct(
     productSchema: CreateProduct,

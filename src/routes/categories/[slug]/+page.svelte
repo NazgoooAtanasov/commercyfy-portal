@@ -1,17 +1,28 @@
 <script lang="ts">
-  import CreateView from "$lib/components/CreateView.svelte";
+  import { page } from "$app/stores";
+  import Button from "$lib/components/Button.svelte";
   import DetailView from "$lib/components/DetailView.svelte";
   import Dropdown from "$lib/components/Dropdown.svelte";
   import Table from "$lib/components/Table.svelte";
-  import { CategoryProductAssignSchema } from "$lib/formSchemas/index.js";
   export let data;
 </script>
 
 <DetailView object={data.category} />
 
 <Dropdown text="Proucts in category">
+  <div class="assign-products">
+    <Button
+      displayValue="Assign Products"
+      href="/categories/{$page.params.slug}/assign"
+    />
+  </div>
   <Table
-    headerEntries={["ID", "Product name", "Product Description", "Product color"]}
+    headerEntries={[
+      "ID",
+      "Product name",
+      "Product Description",
+      "Product color",
+    ]}
   >
     {#each data.category.products ?? [] as product}
       <div class="row">
@@ -24,10 +35,10 @@
   </Table>
 </Dropdown>
 
-
-<CreateView
-  triggerText="Assign product"
-  method="POST"
-  schema={CategoryProductAssignSchema}
-  entry="Product assignement"
-/>
+<style>
+  .assign-products {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+</style>

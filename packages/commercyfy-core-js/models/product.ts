@@ -17,3 +17,5 @@ export type GetProduct = Product & {
   images: ProductImage[];
   custom_fields: Record<string, any>;
 };
+
+export type GetProducts = Product[];

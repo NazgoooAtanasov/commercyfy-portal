@@ -18,6 +18,7 @@ import type {
   PortalUser,
   ObjectType,
   GetBaseExtensions,
+  GetProducts,
 } from "./models";
 import type {
   CreateCategory,
@@ -95,6 +96,18 @@ export class CommercyfyCoreConnection implements CommercyfyCoreActions {
     categorySchema: CreateCategory,
   ): CommercyfyResponse<CommercyfyEntryResponse> {
     return this.send("/categories", categorySchema, "POST");
+  }
+
+  assignProducts(id: string, productIds: string[]): CommercyfyResponse<void> {
+    return this.send(
+      "/categories/assign/products",
+      { category_id: id, product_ids: productIds },
+      "POST",
+    );
+  }
+
+  getProducts(): CommercyfyResponse<GetProducts> {
+    return this.send("/products");
   }
 
   getProduct(id: string): CommercyfyResponse<GetProduct> {
