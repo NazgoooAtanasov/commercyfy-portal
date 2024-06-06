@@ -6,6 +6,9 @@
   export let placeholder: string | undefined = undefined;
   export let minLength: number | undefined = undefined;
   export let maxLength: number | undefined = undefined;
+  export let onInput: (e: Event) => void = () => {};
+  export let onFocus: (e: Event) => void = () => {};
+  export let onBlur: (e: Event) => void = () => {};
 </script>
 
 <div class="form-field">
@@ -22,6 +25,9 @@
     {placeholder}
     minlength={minLength}
     maxlength={maxLength}
+    on:input={onInput}
+    on:focus={onFocus}
+    on:blur={onBlur}
   />
 </div>
 

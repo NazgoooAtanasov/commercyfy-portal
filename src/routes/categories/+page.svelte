@@ -13,7 +13,7 @@
       <div>
         <a href="/categories/{category.id}">{category.category_reference}</a>
       </div>
-      <div>{category.category_description}</div>
+      <div>{category.category_description ?? "<empty>"}</div>
     </div>
   {/each}
 </Table>

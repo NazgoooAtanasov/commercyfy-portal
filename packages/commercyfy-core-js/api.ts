@@ -40,7 +40,10 @@ export interface CommercyfyCoreActions {
   assignProducts(id: string, productIds: string[]): CommercyfyResponse<void>;
 
   getProducts(): CommercyfyResponse<GetProducts>;
-  getProduct(id: string): CommercyfyResponse<GetProduct>;
+  getProduct(
+    id: string,
+    extend?: { categories: boolean },
+  ): CommercyfyResponse<GetProduct>;
   createProduct(
     productSchema: CreateProduct,
   ): CommercyfyResponse<CommercyfyEntryResponse>;

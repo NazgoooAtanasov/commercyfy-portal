@@ -110,8 +110,18 @@ export class CommercyfyCoreConnection implements CommercyfyCoreActions {
     return this.send("/products");
   }
 
-  getProduct(id: string): CommercyfyResponse<GetProduct> {
-    return this.send(`/product/${id}`);
+  getProduct(
+    id: string,
+    extend?: { categories: boolean },
+  ): CommercyfyResponse<GetProduct> {
+    const searchParams = new URLSearchParams();
+    if (extend?.categories) {
+      searchParams.append("extend", "categories");
+    }
+
+    return this.send(
+      `/product/${id}${searchParams.size > 0 ? "?" + searchParams.toString() : ""}`,
+    );
   }
 
   createProduct(

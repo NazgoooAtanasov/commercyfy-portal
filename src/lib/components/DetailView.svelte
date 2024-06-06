@@ -2,7 +2,7 @@
   import type { GetCategory, GetProduct, Product } from "commercyfy-core-js";
   export let object: GetProduct | GetCategory;
   const entries = Object.entries(object).filter(
-    ([key]) => key !== "custom_fields" && key !== "products",
+    ([key, value]) => !Array.isArray(value) && typeof value !== "object",
   );
   const customFields = Object.entries(object.custom_fields);
 </script>

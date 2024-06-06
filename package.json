@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "commercyfy-core-js": "file:./packages/commercyfy-core-js",
+    "svelte-multiselect": "^10.3.0",
     "zod": "^3.23.8"
   },
   "type": "module"

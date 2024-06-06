@@ -26,7 +26,7 @@
   >
     {#each data.category.products ?? [] as product}
       <div class="row">
-        <a href="/product/{product.id}">{product.id}</a>
+        <a href="/products/{product.id}">{product.id}</a>
         <div>{product.product_name}</div>
         <div>{product.product_description}</div>
         <div>{product.product_color}</div>
