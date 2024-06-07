@@ -1,7 +1,7 @@
 export type CreateProductImage = {
   src: string;
   srcset: string | null;
-  alt: string | null;
+  alt?: string;
 };
 
 export type CreateProduct = {

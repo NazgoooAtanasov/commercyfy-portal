@@ -9,6 +9,7 @@
   export let onInput: (e: Event) => void = () => {};
   export let onFocus: (e: Event) => void = () => {};
   export let onBlur: (e: Event) => void = () => {};
+  export let onChange: (e: Event) => void = () => {};
 </script>
 
 <div class="form-field">
@@ -28,6 +29,7 @@
     on:input={onInput}
     on:focus={onFocus}
     on:blur={onBlur}
+    on:change={onChange}
   />
 </div>
 

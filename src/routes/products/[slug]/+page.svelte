@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { page } from "$app/stores";
+  import Button from "$lib/components/Button.svelte";
   import Carousel from "$lib/components/Carousel.svelte";
   import DetailView from "$lib/components/DetailView.svelte";
   import Dropdown from "$lib/components/Dropdown.svelte";
@@ -8,13 +10,19 @@
 
 <DetailView object={data.product} />
 
-{#if data.product.images?.length > 0}
-  <Dropdown text="Images">
+<Dropdown text="Images">
+  <div class="assign-images">
+    <Button
+      href={`/products/${$page.params.slug}/image`}
+      displayValue="Create image"
+    />
+  </div>
+  {#if data.product.images?.length > 0}
     <section class="images">
       <Carousel items={data.product.images} />
     </section>
-  </Dropdown>
-{/if}
+  {/if}
+</Dropdown>
 
 {#if data.product.categories?.length > 0}
   <Dropdown text="Categories">
@@ -33,9 +41,15 @@
 {/if}
 
 <style>
-.images {
-  padding: 10px;
-  background-color: var(--color-white);
-  border-radius: var(--border-radius);
-}
+  .images {
+    padding: 10px;
+    background-color: var(--color-white);
+    border-radius: var(--border-radius);
+  }
+
+  .assign-images {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
 </style>
