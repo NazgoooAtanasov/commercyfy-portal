@@ -5,6 +5,7 @@ import { commercyfyUnwrap } from "commercyfy-core-js";
 export const load: PageServerLoad = async ({ cookies, params, locals }) => {
   const product = await locals.commercyfyConnection.getProduct(params.slug, {
     categories: true,
+    inventories: true,
   });
   if (commercyfyUnwrap(product)) {
     throw error(400, product.error);

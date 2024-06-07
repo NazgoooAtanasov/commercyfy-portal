@@ -24,7 +24,7 @@
   {/if}
 </Dropdown>
 
-{#if data.product.categories?.length > 0}
+{#if data.product.categories && data.product.categories.length > 0}
   <Dropdown text="Categories">
     <Table headerEntries={["Category reference", "Category name"]}>
       {#each data.product.categories as category}
@@ -34,6 +34,23 @@
             >
           </div>
           <div>{category.category_name}</div>
+        </div>
+      {/each}
+    </Table>
+  </Dropdown>
+{/if}
+
+{#if data.product.inventories && data.product.inventories.length > 0}
+  <Dropdown text="Inventories">
+    <Table headerEntries={["Allocaiton", "Inventory"]}>
+      {#each data.product.inventories as inventory}
+        <div class="row">
+          <div>{inventory.allocation}</div>
+          <div>
+            <a href="/inventories/{inventory.inventory_id}"
+              >{inventory.inventory_id}</a
+            >
+          </div>
         </div>
       {/each}
     </Table>

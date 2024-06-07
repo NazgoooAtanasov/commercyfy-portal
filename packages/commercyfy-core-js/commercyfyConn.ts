@@ -112,11 +112,20 @@ export class CommercyfyCoreConnection implements CommercyfyCoreActions {
 
   getProduct(
     id: string,
-    extend?: { categories: boolean },
+    extend?: { categories: boolean; inventories: boolean },
   ): CommercyfyResponse<GetProduct> {
     const searchParams = new URLSearchParams();
     if (extend?.categories) {
       searchParams.append("extend", "categories");
+    }
+
+    if (extend?.inventories) {
+      const extend = searchParams.get("extend");
+      if (!extend) {
+        searchParams.append("extend", "categories");
+      } else {
+        searchParams.set("extend", `${extend},inventories`);
+      }
     }
 
     return this.send(

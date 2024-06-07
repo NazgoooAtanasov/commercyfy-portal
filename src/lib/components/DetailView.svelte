@@ -1,6 +1,10 @@
 <script lang="ts">
-  import type { GetCategory, GetProduct, Product } from "commercyfy-core-js";
-  export let object: GetProduct | GetCategory;
+  import type {
+    GetCategory,
+    GetInventory,
+    GetProduct,
+  } from "commercyfy-core-js";
+  export let object: GetProduct | GetCategory | GetInventory;
   const entries = Object.entries(object).filter(
     ([key, value]) => !Array.isArray(value) && typeof value !== "object",
   );
