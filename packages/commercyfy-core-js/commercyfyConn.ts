@@ -112,7 +112,7 @@ export class CommercyfyCoreConnection implements CommercyfyCoreActions {
 
   getProduct(
     id: string,
-    extend?: { categories: boolean; inventories: boolean },
+    extend?: { categories: boolean; inventories: boolean; pricebooks: boolean },
   ): CommercyfyResponse<GetProduct> {
     const searchParams = new URLSearchParams();
     if (extend?.categories) {
@@ -122,9 +122,18 @@ export class CommercyfyCoreConnection implements CommercyfyCoreActions {
     if (extend?.inventories) {
       const extend = searchParams.get("extend");
       if (!extend) {
-        searchParams.append("extend", "categories");
+        searchParams.append("extend", "inventories");
       } else {
         searchParams.set("extend", `${extend},inventories`);
+      }
+    }
+
+    if (extend?.pricebooks) {
+      const extend = searchParams.get("extend");
+      if (!extend) {
+        searchParams.append("extend", "pricebooks");
+      } else {
+        searchParams.set("extend", `${extend},pricebooks`);
       }
     }
 
@@ -178,7 +187,7 @@ export class CommercyfyCoreConnection implements CommercyfyCoreActions {
   }
 
   getPricebook(id: string): CommercyfyResponse<GetPricebook> {
-    return this.send(`/pricebooks/${id}`);
+    return this.send(`/pricebook/${id}`);
   }
 
   getPricebookRecord(

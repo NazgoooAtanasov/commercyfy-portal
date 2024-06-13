@@ -2,9 +2,10 @@
   import type {
     GetCategory,
     GetInventory,
+    GetPricebook,
     GetProduct,
   } from "commercyfy-core-js";
-  export let object: GetProduct | GetCategory | GetInventory;
+  export let object: GetProduct | GetCategory | GetInventory | GetPricebook;
   const entries = Object.entries(object).filter(
     ([key, value]) => !Array.isArray(value) && typeof value !== "object",
   );

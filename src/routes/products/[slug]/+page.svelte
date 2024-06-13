@@ -6,6 +6,7 @@
   import Dropdown from "$lib/components/Dropdown.svelte";
   import Table from "$lib/components/Table.svelte";
   export let data;
+  console.log(data);
 </script>
 
 <DetailView object={data.product} />
@@ -49,6 +50,23 @@
           <div>
             <a href="/inventories/{inventory.inventory_id}"
               >{inventory.inventory_id}</a
+            >
+          </div>
+        </div>
+      {/each}
+    </Table>
+  </Dropdown>
+{/if}
+
+{#if data.product.pricebooks && data.product.pricebooks.length > 0}
+  <Dropdown text="Pricebooks">
+    <Table headerEntries={["Price", "Pricebook"]}>
+      {#each data.product.pricebooks as pricebook}
+        <div class="row">
+          <div>{pricebook.price}</div>
+          <div>
+            <a href="/pricebooks/{pricebook.pricebook_id}"
+              >{pricebook.pricebook_id}</a
             >
           </div>
         </div>

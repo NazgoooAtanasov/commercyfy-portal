@@ -8,6 +8,7 @@
     <a href="/categories">Categories</a>
     <a href="/products">Products</a>
     <a href="/inventories">Inventories</a>
+    <a href="/pricebooks">Pricebooks</a>
     <a href="/signin">Signin</a>
   </nav>
   <div class="content">

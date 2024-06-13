@@ -10,7 +10,8 @@ export type GetPricebook = {
   pricebook_name: string;
   pricebook_reference: string;
   pricebook_currency_code: string;
+  records: GetPricebookRecord[];
   custom_fields: Record<string, any>;
 };
 
-export type GetPricebooks = Omit<GetPricebook, "custom_fields">[];
+export type GetPricebooks = Omit<GetPricebook, "custom_fields" | "records">[];

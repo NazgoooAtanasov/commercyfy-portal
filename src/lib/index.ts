@@ -2,9 +2,10 @@ import type { GetBaseExtensions } from "commercyfy-core-js";
 import { z } from "zod";
 
 export function validateExternalFields(
-  object: Record<string, unknown>,
+  form: FormData,
   extensions: GetBaseExtensions,
 ): { valid: true } | { valid: false; message?: string } {
+  const object = Object.fromEntries(form.entries());
   const validations = extensions.map((extension) => {
     let field: unknown = object[extension.name];
     if (!field) {
@@ -65,3 +66,5 @@ export function validateExternalFields(
 
   return { valid: true };
 }
+
+export * from "./forms";

@@ -1,4 +1,4 @@
-import type { GetCategories, GetInventoryRecord } from ".";
+import type { GetCategories, GetInventoryRecord, GetPricebookRecord } from ".";
 
 export type Product = {
   id: string;
@@ -20,6 +20,7 @@ export type GetProduct = Product & {
   custom_fields: Record<string, any>;
   categories?: GetCategories;
   inventories?: GetInventoryRecord[];
+  pricebooks?: GetPricebookRecord[];
 };
 
 export type GetProducts = Product[];

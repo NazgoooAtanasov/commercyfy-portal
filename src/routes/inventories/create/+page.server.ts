@@ -1,8 +1,8 @@
-import { commercyfyUnwrap, type CreateInventory } from "commercyfy-core-js";
+import { commercyfyUnwrap } from "commercyfy-core-js";
 import type { PageServerLoad, Actions } from "./$types";
 import { error, fail } from "@sveltejs/kit";
 import { z } from "zod";
-import { validateExternalFields } from "$lib";
+import { validateExternalFields, buildExtensionsObject, validateForm } from "$lib";
 
 export const load: PageServerLoad = async ({ locals }) => {
   const extensions =
@@ -21,21 +21,9 @@ const createInventorySchema = z.object({
 export const actions: Actions = {
   create: async ({ request, locals }) => {
     const form = await request.formData();
-    const inventoryData = [...form.entries()].reduce(
-      (acc, [key, value]) => {
-        acc[key] = value.toString();
-        return acc;
-      },
-      {} as Record<string, string>,
-    );
-
-    const data = createInventorySchema.safeParse(inventoryData);
-    if (!data.success) {
-      return fail(400, {
-        message: data.error.issues
-          .map((issue) => `${issue.path}: ${issue.message}`)
-          .join(", "),
-      });
+    const baseValidation = await validateForm(form, createInventorySchema);
+    if (!baseValidation.valid) {
+      return fail(400, { message: baseValidation.message });
     }
 
     const extensions =
@@ -44,30 +32,18 @@ export const actions: Actions = {
       return fail(400, { message: extensions.error });
     }
 
-    const validation = validateExternalFields(inventoryData, extensions);
+    const inventoryData = baseValidation.data!;
+    const validation = validateExternalFields(form, extensions);
     if (!validation.valid) {
+      console.log(validation);
       return fail(400, { message: validation.message });
     }
 
-    const inventory: CreateInventory = {
-      inventory_reference: data.data.inventory_reference,
-      inventory_name: data.data.inventory_name,
-      custom_fields: extensions.reduce(
-        (acc, value) => {
-          if (value.$type === "string") {
-            acc[value.name] = inventoryData[value.name];
-          } else if (value.$type === "int") {
-            acc[value.name] = parseInt(inventoryData[value.name]);
-          }
-
-          return acc;
-        },
-        {} as Record<string, unknown>,
-      ),
-    };
-
-    const createInventory =
-      await locals.commercyfyConnection.createInventory(inventory);
+    const createInventory = await locals.commercyfyConnection.createInventory({
+      inventory_reference: inventoryData.inventory_reference,
+      inventory_name: inventoryData.inventory_name,
+      custom_fields: buildExtensionsObject(form, extensions),
+    });
     if (commercyfyUnwrap(createInventory)) {
       return fail(400, { message: createInventory.error });
     }

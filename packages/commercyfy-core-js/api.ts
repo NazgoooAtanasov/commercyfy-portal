@@ -42,7 +42,7 @@ export interface CommercyfyCoreActions {
   getProducts(): CommercyfyResponse<GetProducts>;
   getProduct(
     id: string,
-    extend?: { categories: boolean; inventories: boolean },
+    extend?: { categories: boolean; inventories: boolean; pricebooks: boolean },
   ): CommercyfyResponse<GetProduct>;
   createProduct(
     productSchema: CreateProduct,
