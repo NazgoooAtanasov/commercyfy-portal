@@ -8,7 +8,8 @@ export function validateExternalFields(
   const object = Object.fromEntries(form.entries());
   const validations = extensions.map((extension) => {
     let field: unknown = object[extension.name];
-    if (!field) {
+
+    if (field === undefined || field === null) {
       return { valid: false };
     }
 

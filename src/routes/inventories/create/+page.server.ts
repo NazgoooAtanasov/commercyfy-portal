@@ -35,7 +35,6 @@ export const actions: Actions = {
     const inventoryData = baseValidation.data!;
     const validation = validateExternalFields(form, extensions);
     if (!validation.valid) {
-      console.log(validation);
       return fail(400, { message: validation.message });
     }
 
