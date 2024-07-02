@@ -52,7 +52,6 @@
 
     <h3>Category assignements</h3>
     <MultiSelect
-      id="fruits"
       bind:selected={categories}
       placeholder="Select categories"
       options={data.categories.map((category) => category.category_reference)}

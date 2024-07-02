@@ -6,9 +6,9 @@ export type CreateCustomFieldBase = {
 };
 
 export type CreateCustomStringField = CreateCustomFieldBase & {
-  type: "string";
-  min_len: number;
-  max_len: number;
+  $type: "string";
+  min_len?: number;
+  max_len?: number;
 };
 
 export type CreateCustomIntField = CreateCustomFieldBase & { type: "int" };

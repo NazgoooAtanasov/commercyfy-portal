@@ -15,6 +15,7 @@
     <a href="/products"><Icons icon="products" /></a>
     <a href="/inventories"><Icons icon="inventories" /></a>
     <a href="/pricebooks"><Icons icon="pricebooks" /></a>
+    <a href="/extensions"><Icons icon="extensions" /></a>
     <a href="/signin">Signin</a>
   </nav>
   <div class="content">

@@ -1,7 +1,7 @@
 <script lang="ts">
   export let displayValue: string;
   export let fieldName: string;
-  export let type: "text" | "password" | "number" = "text";
+  export let type: "text" | "password" | "number" | "checkbox" = "text";
   export let required: boolean = false;
   export let placeholder: string | undefined = undefined;
   export let minLength: number | undefined = undefined;
@@ -41,7 +41,7 @@
   }
 
   label,
-  input {
+  input:not([type="checkbox"]) {
     flex-basis: 100%;
   }
 
@@ -55,7 +55,7 @@
     color: var(--color-error);
   }
 
-  input {
+  input:not([type="checkbox"]) {
     box-shadow: 0 0 0 1px var(--color-primary);
     padding: 20px 10px 10px 10px;
 

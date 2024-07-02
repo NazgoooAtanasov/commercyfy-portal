@@ -35,6 +35,12 @@
         <Icons icon="pricebooks" />
       </div>
     </a>
+    <a href="/extensions" class="navigation-item">
+      <h3>Extensions</h3>
+      <div class="icon">
+        <Icons icon="extensions" />
+      </div>
+    </a>
   </div>
 </Section>
 

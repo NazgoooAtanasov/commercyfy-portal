@@ -1,5 +1,4 @@
 import type {
-  BaseExtension,
   GetBaseExtensions,
   GetCategories,
   GetCategory,

@@ -378,6 +378,38 @@
   </svg>
 {/if}
 
+{#if icon === "extensions"}
+  <svg
+    viewBox="0 0 109.90467 109.90468"
+    version="1.1"
+    id="svg1"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <defs id="defs1" />
+    <g id="layer1" transform="translate(-39.059937,-83.178388)">
+      <rect
+        style="fill:currentColor;fill-rule:evenodd;stroke-width:0.323001"
+        id="rect1"
+        width="22.924574"
+        height="109.90468"
+        x="82.549988"
+        y="83.178383"
+        ry="11.462287"
+      />
+      <rect
+        style="fill:currentColor;fill-rule:evenodd;stroke-width:0.323001"
+        id="rect1-5"
+        width="22.924574"
+        height="109.90468"
+        x="126.66843"
+        y="-148.96461"
+        ry="11.462287"
+        transform="rotate(90)"
+      />
+    </g>
+  </svg>
+{/if}
+
 <style>
   svg {
     width: 100%;
