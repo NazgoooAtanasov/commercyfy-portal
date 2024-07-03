@@ -1,5 +1,5 @@
 import { redirect, type Handle } from "@sveltejs/kit";
-import { COMMERCYFY_CORE_URL } from "$env/static/private";
+import { env } from "$env/dynamic/private";
 import { CommercyfyCoreConnection } from "commercyfy-core-js";
 
 export const handle: Handle = async ({ event, resolve }) => {
@@ -9,7 +9,7 @@ export const handle: Handle = async ({ event, resolve }) => {
   }
 
   event.locals.commercyfyConnection = new CommercyfyCoreConnection(
-    COMMERCYFY_CORE_URL,
+    env.COMMERCYFY_CORE_URL,
     authToken!,
   );
   return await resolve(event);
