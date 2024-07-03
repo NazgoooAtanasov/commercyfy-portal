@@ -1,13 +1,11 @@
 import type { GetBaseExtensions } from "commercyfy-core-js";
 import { type ZodObject, type ZodRawShape } from "zod";
 
-export async function validateForm<T extends ZodRawShape>(
-  formData: FormData,
+export async function validate<T extends ZodRawShape>(
+  data: any,
   schema: ZodObject<T>,
 ) {
-  const entries = Object.fromEntries(formData.entries());
-
-  const validation = await schema.safeParseAsync(entries);
+  const validation = await schema.safeParseAsync(data);
   if (!validation.success) {
     return {
       valid: false,
@@ -16,6 +14,14 @@ export async function validateForm<T extends ZodRawShape>(
   }
 
   return { valid: true, data: validation.data };
+}
+
+export async function validateForm<T extends ZodRawShape>(
+  formData: FormData,
+  schema: ZodObject<T>,
+) {
+  const entries = Object.fromEntries(formData.entries());
+  return validate(entries, schema);
 }
 
 export function buildExtensionsObject(
