@@ -4,7 +4,12 @@
 </script>
 
 <div class="table">
-  <h2>{tableName}</h2>
+  <div class="table-head">
+    {#if tableName}
+      <h2>{tableName}</h2>
+    {/if}
+    <slot name="table-head" />
+  </div>
   <div class="row rows-descriptors">
     {#each headerEntries as entry}
       <div>{entry}</div>
@@ -25,11 +30,18 @@
     color: var(--color-accent);
   }
 
+  .table-head {
+    display: flex;
+    justify-content: space-between;
+    color: var(--color-black);
+  }
+
   :global(.row) {
     width: 100%;
     display: flex;
     padding: 20px 0;
     border-bottom: 1px solid var(--color-accent);
+    color: var(--color-black);
   }
 
   :global(.row:not(.rows-descriptors):hover) {

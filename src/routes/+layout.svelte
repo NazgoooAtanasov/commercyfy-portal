@@ -1,12 +1,22 @@
 <script lang="ts">
   import { page } from "$app/stores";
+  import Icons from "$lib/components/Icons.svelte";
   import "./variables.css";
 </script>
 
 <main>
   <nav>
-    <div class="logo"></div>
-    <a href="/categories">Categories</a>
+    <a href="/">
+      <Icons icon="home" />
+    </a>
+    <a href="/categories">
+      <Icons icon="categories" />
+    </a>
+    <a href="/products"><Icons icon="products" /></a>
+    <a href="/inventories"><Icons icon="inventories" /></a>
+    <a href="/pricebooks"><Icons icon="pricebooks" /></a>
+    <a href="/extensions"><Icons icon="extensions" /></a>
+    <a href="/signin">Signin</a>
   </nav>
   <div class="content">
     <div class="location-breadcrumb">
@@ -26,9 +36,9 @@
   nav {
     display: flex;
     border-bottom: 1px solid var(--color-accent);
-    flex-basis: 20%;
     height: 100%;
     background-color: var(--color-primary);
+    flex-direction: column;
   }
 
   nav * {
@@ -36,8 +46,9 @@
     color: white;
   }
 
-  .logo {
-    height: 100%;
+  nav a {
+    max-width: 70px;
+    color: white;
   }
 
   .content {
