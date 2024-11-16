@@ -54,7 +54,7 @@
     <div class="form-status" style={statusStyle}>{status}</div>
   {/if}
   <slot />
-  <Button displayValue={submitDisplayValue} />
+  <Button>{submitDisplayValue}</Button>
 </form>
 
 <style>

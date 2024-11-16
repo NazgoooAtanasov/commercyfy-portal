@@ -1,9 +1,9 @@
 <script lang="ts">
-  import "../app.css";
+  import "../../app.css";
   import Icons from "$lib/components/Icons.svelte";
-  import Breadcrumbs from "$lib/components/Breadcrumbs.svelte";
-  import Button from "$lib/components/Button.svelte";
-  import NavigationItem from "$lib/components/NavigationItem.svelte";
+  import Breadcrumbs from "./Breadcrumbs.svelte";
+  import Button from "./Button.svelte";
+  import NavigationItem from "./NavigationItem.svelte";
 </script>
 
 <div class="flex h-full w-full">
@@ -11,7 +11,7 @@
     <NavigationItem href="/">
       <Icons icon="home" />
     </NavigationItem>
-    <NavigationItem href="/products">
+    <NavigationItem href="/">
       <Icons icon="products" />
     </NavigationItem>
     <NavigationItem href="/">

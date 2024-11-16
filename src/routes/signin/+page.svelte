@@ -3,7 +3,7 @@
   import Input from "$lib/components/Input.svelte";
 </script>
 
-<section>
+<section class="p-8">
   <Form action="?/signin" method="POST">
     <Input
       displayValue="Email"
@@ -20,11 +20,3 @@
     />
   </Form>
 </section>
-
-<style>
-  section {
-    flex-grow: 1;
-    background-color: var(--color-white);
-    border-radius: var(--border-radius);
-  }
-</style>

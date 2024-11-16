@@ -12,18 +12,18 @@
   export let onChange: (e: Event) => void = () => {};
 </script>
 
-<div class="form-field">
-  <label for={fieldName}
-    >{displayValue}
+<div class="mb-5 flex flex-col">
+  <label for={fieldName} class="mb-3 w-full">
+    {displayValue}
     {#if required}
-      <sup class="field-required">*</sup>
+      <sup class="text-red text-s">*</sup>
     {/if}
   </label>
   <input
-    {type}
-    name={fieldName}
-    {required}
     {placeholder}
+    {type}
+    class="w-full rounded-md border p-2 pl-4"
+    name={fieldName}
     minlength={minLength}
     maxlength={maxLength}
     on:input={onInput}
@@ -32,39 +32,3 @@
     on:change={onChange}
   />
 </div>
-
-<style>
-  .form-field {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 5px 10px;
-  }
-
-  label,
-  input:not([type="checkbox"]) {
-    flex-basis: 100%;
-  }
-
-  label {
-    padding: 10px 5px;
-    font-size: 16px;
-  }
-
-  .field-required {
-    font-size: 11px;
-    color: var(--color-error);
-  }
-
-  input:not([type="checkbox"]) {
-    box-shadow: 0 0 0 1px var(--color-primary);
-    padding: 20px 10px 10px 10px;
-
-    border-radius: var(--border-radius);
-    border: none;
-    outline: none;
-  }
-
-  input:focus {
-    box-shadow: 0 0 0 1px var(--color-accent);
-  }
-</style>

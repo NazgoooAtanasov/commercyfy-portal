@@ -3,8 +3,11 @@
   let visible = false;
 </script>
 
-<div class="dropdown">
-  <button on:click={() => (visible = !visible)}>
+<div class="mb-2">
+  <button
+    class="mb-2 flex w-full justify-between rounded-md border border-silver bg-white p-3 text-left"
+    on:click={() => (visible = !visible)}
+  >
     <span>{text}</span>
     <span>
       <svg
@@ -35,23 +38,6 @@
 </div>
 
 <style>
-  .dropdown {
-    margin-bottom: 10px;
-  }
-
-  button {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    padding: 15px;
-    margin-bottom: 10px;
-    border: 1px solid var(--color-accent);
-    border-radius: var(--border-radius);
-    background-color: var(--color-white);
-    text-align: left;
-    box-shadow: var(--box-shadow);
-  }
-
   svg {
     transform: rotate(-90deg);
     color: var(--color-accent);
